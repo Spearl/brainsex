@@ -8,13 +8,8 @@ data = bytearray(30000)
 data_view = memoryview(data)
 dp = 0
 ip = 0
-tip = None
 while ip < in_len and ip >= 0:
     i = instructions[ip]
-    for p in range(10): print("v" if p == dp else " "),
-    print ""
-    for p in data[:10]: print(hex(p)[-1]),
-    print "\t%r dp:%s" % (i, dp)
     if i is '>':
         dp += 1
     elif i is '<':
