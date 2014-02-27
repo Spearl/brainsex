@@ -18,24 +18,16 @@ while ip < len(code) and ip >= 0 and dp >= 0 and dp < 30000:
     elif code[ip] is '<':
         dp -= 1
     elif code[ip] is '+':
-        if data[dp] == 255:
-            data[dp] = 0
-        else:
-            data[dp] += 1
+        data[dp] = data[dp]+1 if data[dp] != 255 else 0
     elif code[ip] is '-':
-        if data[dp] == 0:
-            data[dp] = 255
-        else:
-            data[dp] -= 1
+        data[dp] = data[dp]-1 if data[dp] != 0 else 255
     elif code[ip] is '.':
         stdout.write(data_view[dp])
     elif code[ip] is ',':
         data_view[dp] = stdin.read(1)
     elif code[ip] is '[':
-        if not data[dp]:
-            ip = loop_map[ip]
+        ip = loop_map[ip] if not data[dp] else ip
     elif code[ip] is ']':
-        if data[dp]:
-            ip = loop_map[ip]
+        ip = loop_map[ip] if data[dp] else ip
     ip += 1
 
