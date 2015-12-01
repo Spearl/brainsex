@@ -29,13 +29,9 @@ while ip < code.length && ip >= 0
     when ','
       data[dp] = gets
     when '['
-      if data[dp].ord == 0
-          ip = loop_map[ip]
-      end
+      ip = loop_map[ip] if data[dp].ord == 0
     when ']'
-      if data[dp].ord != 0
-          ip = loop_map[ip]
-      end
+      ip = loop_map[ip] if data[dp].ord != 0
   end
   ip += 1
 end
