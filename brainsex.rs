@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use std::env;
 use std::io::prelude::*;
 use std::fs::File;
+use std::str;
 
 fn main() {
     let args: Vec<_> = env::args().collect();
@@ -34,7 +35,27 @@ fn main() {
         }
     }
 
-
-    let s: String = code.into_iter().collect();
-    println!("{}", s);
+    let mut data: [u8; 30000] = [0; 30000];
+    let mut ip = 0;
+    let mut dp = 0;
+    while ip < code.len() {
+        match code[ip] {
+            '>' => dp += 1,
+            '<' => dp -= 1,
+            '+' => data[dp] += 1,
+            '-' => data[dp] -= 1,
+            '.' => print!("{}", str::from_utf8(&[data[dp]]).unwrap()),
+            ',' => data[dp] = std::io::stdin().bytes().next().and_then(|result| result.ok()).unwrap(),
+            '[' if data[dp] == 0 => ip = match loop_map.get(&ip) {
+                Some(&new_ip) => new_ip,
+                _ => panic!(),
+            },
+            ']' if data[dp] != 0 => ip = match loop_map.get(&ip) {
+                Some(&new_ip) => new_ip,
+                _ => panic!(),
+            },
+            _ => {},
+        }
+        ip += 1;
+    }
 }
