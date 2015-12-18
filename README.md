@@ -1,3 +1,8 @@
 ## Brainsex
 
-A minimalist brainfuck interpreter written in python.
+A brainfuck interpreter collection.
+
+Written in:
+- Python
+- Ruby
+- Rust
