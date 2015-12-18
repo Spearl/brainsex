@@ -1,8 +1,6 @@
 ## Brainsex
 
-A brainfuck interpreter collection.
-
-Written in:
+Languages so far:
 - Python
 - Ruby
 - Rust
